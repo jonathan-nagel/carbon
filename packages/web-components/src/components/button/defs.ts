@@ -49,6 +49,16 @@ export enum BUTTON_KIND {
    * Danger ghost button,
    */
   DANGER_GHOST = 'danger-ghost',
+
+  /**
+   * Text button.
+   */
+  TEXT = 'text',
+
+  /**
+   * Text inherit button.
+   */
+  TEXT_INHERIT = 'text-inherit',
 }
 
 /**

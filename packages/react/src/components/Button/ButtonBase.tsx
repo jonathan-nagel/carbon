@@ -41,15 +41,17 @@ const ButtonBase = React.forwardRef(function ButtonBase<
 ) {
   const prefix = usePrefix();
 
+  const isTextButton = kind === 'text' || kind === 'text-inherit';
+
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--xs`]: size === 'xs' && !isExpressive, // TODO: V12 - Remove this class
-    [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive, // TODO: V12 - Remove this class
-    [`${prefix}--btn--md`]: size === 'md' && !isExpressive, // TODO: V12 - Remove this class
-    [`${prefix}--btn--lg`]: size === 'lg' && !isExpressive, // TODO: V12 - Remove this class
-    [`${prefix}--btn--xl`]: size === 'xl', // TODO: V12 - Remove this class
-    [`${prefix}--btn--2xl`]: size === '2xl', // TODO: V12 - Remove this class
-    [`${prefix}--layout--size-${size}`]: size,
+    [`${prefix}--btn--xs`]: !isTextButton && size === 'xs' && !isExpressive, // TODO: V12 - Remove this class
+    [`${prefix}--btn--sm`]: !isTextButton && size === 'sm' && !isExpressive, // TODO: V12 - Remove this class
+    [`${prefix}--btn--md`]: !isTextButton && size === 'md' && !isExpressive, // TODO: V12 - Remove this class
+    [`${prefix}--btn--lg`]: !isTextButton && size === 'lg' && !isExpressive, // TODO: V12 - Remove this class
+    [`${prefix}--btn--xl`]: !isTextButton && size === 'xl', // TODO: V12 - Remove this class
+    [`${prefix}--btn--2xl`]: !isTextButton && size === '2xl', // TODO: V12 - Remove this class
+    [`${prefix}--layout--size-${size}`]: !isTextButton && size,
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
@@ -71,7 +73,12 @@ const ButtonBase = React.forwardRef(function ButtonBase<
     />
   );
 
-  const dangerButtonVariants = ['danger', 'danger--tertiary', 'danger--ghost'];
+  const dangerButtonVariants = [
+    'danger',
+    'danger--primary',
+    'danger--tertiary',
+    'danger--ghost',
+  ];
   const hasDangerDescription =
     dangerButtonVariants.includes(kind) && Boolean(dangerDescription);
 

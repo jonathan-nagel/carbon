@@ -366,10 +366,10 @@ element.
 
 ### Button `kind`
 
-Carbon has seven types of buttons, `primary`, `secondary`, `tertiary`, `ghost`,
-`danger`, `danger-tertiary`, and `danger-ghost`. If no `kind` is specified, a
-`primary` button will be rendered. For more information on when to use each
-variant, check out the
+Carbon has nine types of buttons: `primary`, `secondary`, `tertiary`, `ghost`,
+`danger`, `danger-tertiary`, `danger-ghost`, `text`, and `text-inherit`. If no
+`kind` is specified, a `primary` button will be rendered. For more information
+on when to use each variant, check out the
 [design documentation](https://www.carbondesignsystem.com/components/button/usage#overview)
 
 <Unstyled
@@ -377,6 +377,7 @@ variant, check out the
     padding: '1rem',
     background: 'var(--cds-background)',
     flexWrap: 'wrap',
+    alignItems: 'center',
     display: 'flex',
     gap: '1rem',
   }}>
@@ -387,6 +388,8 @@ variant, check out the
   <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
   <cds-button kind="danger-ghost">Danger Ghost</cds-button>
   <cds-button kind="ghost">Ghost</cds-button>
+  <cds-button kind="text">Text</cds-button>
+  <cds-button kind="text-inherit">Text inherit</cds-button>
 </Unstyled>
 
 ```html
@@ -397,13 +400,15 @@ variant, check out the
 <cds-button kind="danger-tertiary">Danger tertiary</cds-button>
 <cds-button kind="danger-ghost">Danger Ghost</cds-button>
 <cds-button kind="ghost">Ghost</cds-button>
+<cds-button kind="text">Text</cds-button>
+<cds-button kind="text-inherit">Text inherit</cds-button>
 ```
 
 ### Button `size`
 
 This attribute specifies at which size the `button` should be rendered. Valid
 values are `xs`, `sm`, `md`, `lg`, `xl`, and `2xl`. If no size is specified, it
-renders as `lg`.
+renders as `lg`. Size has no effect when `kind` is `text` or `text-inherit`.
 
 <Unstyled
   style={{

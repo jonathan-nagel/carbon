@@ -296,6 +296,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
     const isIconOnly = hasIcon && !hasMainContent;
     const isGhostIconOnly = isIconOnly && kind === BUTTON_KIND.GHOST;
     const ariaPressed = isGhostIconOnly && isSelected ? true : undefined;
+    const isTextButton =
+      kind === BUTTON_KIND.TEXT || kind === BUTTON_KIND.TEXT_INHERIT;
 
     let defaultClasses = {
       [`${prefix}--btn`]: true,
@@ -305,8 +307,8 @@ class CDSButton extends HostListenerMixin(FocusMixin(LitElement)) {
       [`${prefix}--btn--danger--ghost`]: kind === BUTTON_KIND.DANGER_GHOST,
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--icon-only`]: isIconOnly,
-      [`${prefix}--btn--${size}`]: !!size,
-      [`${prefix}--layout--size-${size}`]: !!size,
+      [`${prefix}--btn--${size}`]: !isTextButton && !!size,
+      [`${prefix}--layout--size-${size}`]: !isTextButton && !!size,
       [`${prefix}-ce--btn--has-icon`]: hasIcon,
       [`${prefix}--btn--expressive`]: isExpressive,
       [`${prefix}--btn--selected`]: isGhostIconOnly && isSelected,

@@ -55,6 +55,9 @@ function createTemplate() {
     'Danger primary': 'danger',
     'Danger tertiary': 'danger--tertiary',
     'Danger ghost': 'danger--ghost',
+    Text: 'text',
+    'Text primary': 'text',
+    'Text inherit': 'text-inherit',
   });
   const size = getSize();
   const isExpressive = instance.getEnum('Size', {

@@ -226,9 +226,11 @@ const sharedArgTypes = {
       'danger',
       'danger--tertiary',
       'danger--ghost',
+      'text',
+      'text-inherit',
     ],
     description:
-      'Specify the kind of Button you want to create. `primary`, `secondary`,`tertiary`, `ghost`, `danger`, `danger--tertiary`, `danger--ghost`',
+      'Specify the kind of Button you want to create. `primary`, `secondary`,`tertiary`, `ghost`, `danger`, `danger--tertiary`, `danger--ghost`, `text`, `text-inherit`',
     control: { type: 'select' },
     type: { name: 'union' },
     table: { defaultValue: { summary: '"primary"' } },
@@ -303,6 +305,10 @@ const textButtonControls = [
   'target',
   'type',
 ];
+
+const textButtonKindControls = textButtonControls.filter(
+  (control) => control !== 'size'
+);
 
 const skeletonControls = ['href', 'size'];
 
@@ -582,6 +588,80 @@ DangerGhost.args = {
 DangerGhost.parameters = {
   controls: {
     include: [...textButtonControls, 'dangerDescription'],
+  },
+};
+
+export const Text = (args) => {
+  const { renderIcon, ...rest } = args;
+  return (
+    <Button
+      {...rest}
+      renderIcon={
+        renderIcon !== 'None' ? getIconFromString(renderIcon) : undefined
+      }
+      onClick={action('onClick')}>
+      Button
+    </Button>
+  );
+};
+
+Text.argTypes = {
+  ...sharedArgTypes,
+  kind: {
+    table: { readonly: true },
+  },
+};
+
+Text.args = {
+  kind: 'text',
+};
+
+Text.parameters = {
+  controls: {
+    include: textButtonKindControls,
+  },
+};
+
+export const TextInherit = (args) => {
+  const { renderIcon, ...rest } = args;
+  const icon =
+    renderIcon !== 'None' ? getIconFromString(renderIcon) : undefined;
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <div style={{ color: 'var(--cds-text-primary)' }}>
+        <p style={{ marginBottom: '0.5rem' }}>Inside text-primary container:</p>
+        <Button {...rest} renderIcon={icon} onClick={action('onClick')}>
+          Button
+        </Button>
+      </div>
+
+      <div style={{ color: 'var(--cds-text-secondary)' }}>
+        <p style={{ marginBottom: '0.5rem' }}>
+          Inside text-secondary container:
+        </p>
+        <Button {...rest} renderIcon={icon} onClick={action('onClick')}>
+          Button
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+TextInherit.argTypes = {
+  ...sharedArgTypes,
+  kind: {
+    table: { readonly: true },
+  },
+};
+
+TextInherit.args = {
+  kind: 'text-inherit',
+};
+
+TextInherit.parameters = {
+  controls: {
+    include: textButtonKindControls,
   },
 };
 

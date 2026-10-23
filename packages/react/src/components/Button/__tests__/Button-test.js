@@ -99,6 +99,8 @@ describe('Button', () => {
     ['danger--ghost', 'cds--btn--danger--ghost'],
     ['danger--tertiary', 'cds--btn--danger--tertiary'],
     ['tertiary', 'cds--btn--tertiary'],
+    ['text', 'cds--btn--text'],
+    ['text-inherit', 'cds--btn--text-inherit'],
   ])(
     'should set the expected classes for the button of kind: `%s`',
     (kind, className) => {
@@ -131,6 +133,19 @@ describe('Button', () => {
     (size, className) => {
       render(<Button size={size}>test</Button>);
       expect(screen.getByText('test')).toHaveClass(className);
+    }
+  );
+
+  it.each(['text', 'text-inherit'])(
+    'should not set size classes when kind is `%s`',
+    (kind) => {
+      render(
+        <Button kind={kind} size="sm">
+          test
+        </Button>
+      );
+      expect(screen.getByText('test')).not.toHaveClass('cds--btn--sm');
+      expect(screen.getByText('test')).not.toHaveClass('cds--layout--size-sm');
     }
   );
 

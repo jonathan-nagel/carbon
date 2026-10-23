@@ -88,6 +88,8 @@ describe('cds-button', () => {
     ['danger-ghost', 'cds--btn--danger--ghost'],
     ['danger-tertiary', 'cds--btn--danger--tertiary'],
     ['tertiary', 'cds--btn--tertiary'],
+    ['text', 'cds--btn--text'],
+    ['text-inherit', 'cds--btn--text-inherit'],
   ];
 
   kinds.forEach(([kind, className]) => {
@@ -98,6 +100,17 @@ describe('cds-button', () => {
       expect(el).to.have.attribute('kind', kind);
       const button = el.shadowRoot?.querySelector('button');
       expect([...button.classList]).to.include(className);
+    });
+  });
+
+  ['text', 'text-inherit'].forEach((kind) => {
+    it(`should not set size classes when kind="${kind}"`, async () => {
+      const el = await fixture(
+        html`<cds-button kind="${kind}" size="sm">test</cds-button>`
+      );
+      const button = el.shadowRoot?.querySelector('button');
+      expect([...button.classList]).to.not.include('cds--btn--sm');
+      expect([...button.classList]).to.not.include('cds--layout--size-sm');
     });
   });
 

@@ -426,6 +426,118 @@
     }
   }
 
+  .#{$prefix}--btn--text {
+    @include button-theme(
+      transparent,
+      transparent,
+      $link-primary,
+      transparent,
+      currentColor,
+      transparent
+    );
+
+    padding: 0;
+    border: 0;
+    min-block-size: auto;
+
+    .#{$prefix}--btn__icon {
+      position: static;
+      align-self: center;
+      margin-inline-start: $spacing-03;
+    }
+
+    // Apply hover styles only on devices that support hover
+    @media (hover: hover) {
+      &:hover {
+        color: $link-primary-hover;
+        text-decoration: underline;
+      }
+    }
+
+    &:focus {
+      box-shadow: none;
+      color: $link-primary;
+      outline: 2px solid $button-focus-color;
+      outline-offset: 1px;
+      text-decoration: underline;
+    }
+
+    &:active {
+      background-color: transparent;
+      color: $link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled,
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
+      border-color: transparent;
+      background: transparent;
+      color: $text-disabled;
+      outline: none;
+      text-decoration: none;
+    }
+  }
+
+  .#{$prefix}--btn--text-inherit {
+    @include button-theme(
+      transparent,
+      transparent,
+      currentColor,
+      transparent,
+      currentColor,
+      transparent
+    );
+
+    padding: 0;
+    border: 0;
+    min-block-size: auto;
+
+    .#{$prefix}--btn__icon {
+      position: static;
+      align-self: center;
+      margin-inline-start: $spacing-03;
+    }
+
+    // Apply hover styles only on devices that support hover
+    @media (hover: hover) {
+      &:hover {
+        color: $link-primary-hover;
+        text-decoration: underline;
+      }
+    }
+
+    &:focus {
+      box-shadow: none;
+      color: $link-primary;
+      outline: 2px solid $button-focus-color;
+      outline-offset: 1px;
+      text-decoration: underline;
+    }
+
+    &:active {
+      background-color: transparent;
+      color: $link-primary-hover;
+      text-decoration: underline;
+    }
+
+    &:disabled,
+    &:hover:disabled,
+    &:focus:disabled,
+    &.#{$prefix}--btn--disabled,
+    &.#{$prefix}--btn--disabled:hover,
+    &.#{$prefix}--btn--disabled:focus {
+      border-color: transparent;
+      background: transparent;
+      color: $text-disabled;
+      outline: none;
+      text-decoration: none;
+    }
+  }
+
   //expressive styles
   .#{$prefix}--btn--expressive {
     @include type-style('body-compact-02');

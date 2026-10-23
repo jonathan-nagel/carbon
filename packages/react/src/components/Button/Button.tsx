@@ -21,6 +21,8 @@ export const ButtonKinds = [
   'danger--ghost',
   'danger--tertiary',
   'tertiary',
+  'text',
+  'text-inherit',
 ] as const;
 
 export type ButtonKind = (typeof ButtonKinds)[number];

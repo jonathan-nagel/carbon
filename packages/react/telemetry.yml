@@ -1041,6 +1041,8 @@ collect:
         - primary
         - secondary
         - tertiary
+        - text
+        - text-inherit
         # General - buttonSize
         - lg
         - md

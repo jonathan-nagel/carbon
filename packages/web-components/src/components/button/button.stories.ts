@@ -47,6 +47,10 @@ const textButtonControls = [
   'type',
 ];
 
+const textButtonKindControls = textButtonControls.filter(
+  (control) => control !== 'size'
+);
+
 const iconButtonControls = [
   ...textButtonControls,
   'isSelected',
@@ -64,6 +68,8 @@ const kind = [
   BUTTON_KIND.DANGER,
   BUTTON_KIND.DANGER_TERTIARY,
   BUTTON_KIND.DANGER_GHOST,
+  BUTTON_KIND.TEXT,
+  BUTTON_KIND.TEXT_INHERIT,
 ];
 
 const types = [BUTTON_TYPE.BUTTON, BUTTON_TYPE.RESET, BUTTON_TYPE.SUBMIT];
@@ -229,7 +235,7 @@ const sharedArgTypes = {
   },
 };
 
-const baseButtonTemplate = (args) => html`
+const baseButtonWithText = (args, text = 'Button') => html`
   <cds-button
     @click=${args.onClick}
     danger-description=${ifDefined(args.dangerDescription)}
@@ -243,9 +249,11 @@ const baseButtonTemplate = (args) => html`
     tabindex=${ifDefined(args.tabindex)}
     size=${ifDefined(args.size)}
     type=${ifDefined(args.type)}>
-    Button ${args.icon?.({ slot: 'icon' })}
+    ${text} ${args.icon?.({ slot: 'icon' })}
   </cds-button>
 `;
+
+const baseButtonTemplate = (args) => baseButtonWithText(args, 'Button');
 
 const iconButtonTemplate = (args) => html`
   <cds-button
@@ -601,6 +609,49 @@ export const DangerGhost = {
   parameters: {
     controls: {
       include: [...textButtonControls, 'dangerDescription'],
+    },
+  },
+};
+
+export const Text = {
+  render: (args) => baseButtonWithText(args, 'Button'),
+  args: { kind: BUTTON_KIND.TEXT },
+  argTypes: {
+    ...sharedArgTypes,
+    kind: {
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: {
+      include: textButtonKindControls,
+    },
+  },
+};
+
+export const TextInherit = {
+  render: (args) => html`
+    <div style="display: flex; flex-direction: column; gap: 1.5rem">
+      <div style="color: var(--cds-text-primary)">
+        <p style="margin-bottom: 0.5rem">Inside text-primary container:</p>
+        ${baseButtonWithText(args, 'Button')}
+      </div>
+      <div style="color: var(--cds-text-secondary)">
+        <p style="margin-bottom: 0.5rem">Inside text-secondary container:</p>
+        ${baseButtonWithText(args, 'Button')}
+      </div>
+    </div>
+  `,
+  args: { kind: BUTTON_KIND.TEXT_INHERIT },
+  argTypes: {
+    ...sharedArgTypes,
+    kind: {
+      table: { readonly: true },
+    },
+  },
+  parameters: {
+    controls: {
+      include: textButtonKindControls,
     },
   },
 };
